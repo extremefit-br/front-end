@@ -13,14 +13,14 @@ const Dicas = () => (
 			<Form className="form-cadastro">
 				<h1 className="form-cadastro__titulo">Dicas</h1>
 				<label className="form-cadastro__label" for="desc">Descrição</label>
-				<textarea name="" id="desc" cols="30" rows="10"></textarea>
+				<textarea className="form-cadastro__campo" name="" id="desc" cols="30" rows="10"></textarea>
 				<label className="form-cadastro__label" for="dicaTipo">Tipo</label>
-				<select id="dicaTipo">
+				<select className="form-cadastro__campo" id="dicaTipo">
 					<option value="dor">Dor</option>
 					<option value="saude">Saude</option>
 					<option value="nutricao">Nutrição</option>
 				</select>
-				<ul className="form-cadastro-lista-botao">
+				<ul className="form-cadastro__lista-botao">
 					<Button className="botao">Adicionar Dica</Button>
 					<Button className="botao">Pesquisar Dica</Button>
 					<Button className="botao">Remover Dica</Button>
