@@ -1,0 +1,41 @@
+.dicas{
+    float: right;
+    height: 100%;
+    padding: 10% 5%;
+    width: calc(100% - 250px);
+}
+.form-cadastro{
+    border: 1px solid #b80505;
+    padding: 5%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.form-cadastro__titulo{
+    position: absolute;
+    top: -18px;
+    left: 15px;
+    margin: 0;
+    background-color: white;
+    display: inline;
+    color: #e94e1b;
+}
+.form-cadastro__label{
+    color: #b80505;
+    font-style: oblique;
+    font-weight: bold;
+}
+.botao{
+    width: 150px;
+    background-color: #b80505;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 0;
+}
+.form-cadastro-lista-botao{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 0 0;
+    padding: 0;
+}
