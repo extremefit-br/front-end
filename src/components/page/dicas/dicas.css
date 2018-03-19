@@ -1,4 +1,4 @@
-.dicas{
+.main{
     float: right;
     height: 100%;
     padding: 10% 5%;
@@ -26,7 +26,7 @@
     font-style: oblique;
     font-weight: bold;
 }
-.botao{
+.form-cadastro__botao{
     width: 150px;
     background-color: #b80505;
     border: none;
@@ -40,6 +40,7 @@
     justify-content: space-between;
     margin: 15px 0 0 0;
     padding: 0;
+    list-style-type: none;
 }
 .form-cadastro__campo{
     border-radius: 10px;
