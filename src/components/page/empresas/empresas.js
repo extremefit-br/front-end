@@ -11,7 +11,7 @@ import './empresas.css'
 class Empresas extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { nomeFantasia: "", razaoSocial: "", cnae: "", cnpj: ""}
+		this.state = { nomeFantasia: "teste", razaoSocial: "teste", cnae: "teste", cnpj: "teste"}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleAdd = this.handleAdd.bind(this)
 	}
@@ -31,7 +31,7 @@ class Empresas extends Component {
 			<Fragment>
 				<Menu />
 				<Container className="main">
-					<Form className="form-cadastro">
+					{/* <Form className="form-cadastro"> */}
 						<h1 className="form-cadastro__titulo">Empresa</h1>
 						<section className="secao-campos">
 							<div className="secao-campos__metade">
@@ -52,7 +52,7 @@ class Empresas extends Component {
 							<li><Button className="form-cadastro__botao">Pesquisar</Button></li>
 							<li><Button className="form-cadastro__botao">Remover</Button></li>
 						</ul>
-					</Form>
+					{/* </Form> */}
 				</Container>
 			</Fragment>
 		)
