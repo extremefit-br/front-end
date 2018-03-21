@@ -17,10 +17,10 @@ class Login extends Component {
 		this.handleAdd = this.handleAdd.bind(this)
 	}
 	handleAdd(){
-		console.log("teste"+postLogin(email, senha))
 		const email = this.state.email
 		const senha = this.state.senha
-		// postLogin(email, senha)
+		console.log(this.state.email + this.state.senha)
+		postLogin(email, senha)
 	}
 	render() {
 		return (
@@ -28,7 +28,7 @@ class Login extends Component {
 				<div>
 					<img className="align-center" src={LogoVidaSaudavel} alt="" />
 				</div>
-				{/* <Form > */}
+				<Form >
 					<div className="box-campo align-center">
 						<FaUser />
 						<Input className="login__form-input" type="email" placeholder="E-mail" autoComplete="email" aria-label="email" value={this.state.email}/>
@@ -38,8 +38,8 @@ class Login extends Component {
 						<Input className="login__form-input" type="password" placeholder="Senha" autoComplete="current-password" aria-label="senha" value={this.state.senha}/>
 					</div>
 					<a className="link-esqueci-senha align-center">Esqueci minha senha</a>
-					<Button className="login-botao align-center" onClick={this.handleAdd}>Login</Button>
-				{/* </Form>  */}
+				<Button className="login-botao align-center" onClick={this.handleAdd}>Login</Button>
+				</Form> 
 			</Container>
 		)
 	}
