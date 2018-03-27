@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react'
-import { postDica } from '../../../api/dicas.js'
+import { postDica, getDica } from '../../../api/dicas.js'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
 import Form from '../../form/form.js'
@@ -19,12 +19,15 @@ class Dicas extends Component {
 		const desc = this.state.desc
 		postDica(desc, 3)
 	}
+	handleSearch() {
+		getDica(3)
+	}
 	render() {	
 		return (
 			<Fragment>
 				<Menu />
 				<Container className="main">
-					<Form className="form-cadastro">
+					{/* <Form className="form-cadastro"> */}
 						<h1 className="form-cadastro__titulo">Dicas</h1>
 						<FormLabel className="form-cadastro__label" for="desc">Descrição</FormLabel>
 						<FormTextarea className="form-cadastro__campo" name="" id="desc" cols="30" rows="10">{this.state.desc}</FormTextarea>
@@ -36,10 +39,10 @@ class Dicas extends Component {
 						</FormSelect>
 						<ul className="form-cadastro__lista-botao">
 							<li><Button className="form-cadastro__botao" onClick={this.handleAdd}>Adicionar</Button></li>
-							<li><Button className="form-cadastro__botao">Pesquisar</Button></li>
+							<li><Button className="form-cadastro__botao" onClick={this.handleSearch}>Pesquisar</Button></li>
 							<li><Button className="form-cadastro__botao">Remover</Button></li>
 						</ul>
-					</Form>
+					{/* </Form> */}
 				</Container>
 			</Fragment>
 		)

@@ -5,6 +5,7 @@ import Login from './components/page/login/login.js'
 import Dicas from './components/page/dicas/dicas.js'
 import Especialista from './components/page/especialista/especialista.js'
 import Empresas from './components/page/empresas/empresas.js'
+import Pesquisa from './components/page/pesquisa/pesquisa.js'
 
 export default props =>(
     <Switch>
@@ -12,6 +13,7 @@ export default props =>(
         <Route path="/dicas" component={Dicas} />
         <Route path="/especialista" component={Especialista} />
         <Route path="/empresas" component={Empresas} />
+        <Route path="/pesquisa" component={Pesquisa} />
         <Route component={Login} />
     </Switch>
 )

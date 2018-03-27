@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react'
-import { postEmpresas } from '../../../api/empresa.js'
+import { postEmpresas, getEmpresas } from '../../../api/empresa.js'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
 import Form from '../../form/form.js'
@@ -11,7 +11,7 @@ import './empresas.css'
 class Empresas extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { nomeFantasia: "teste", razaoSocial: "teste", cnae: "teste", cnpj: "teste"}
+		this.state = { nomeFantasia: "", razaoSocial: "", cnae: "", cnpj: ""}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleAdd = this.handleAdd.bind(this)
 	}
@@ -25,6 +25,9 @@ class Empresas extends Component {
 		const cnae = this.state.cnae
 		const cnpj = this.state.cnpj
 		postEmpresas(nomeFantasia, razaoSocial, cnae, cnpj)
+	}
+	handleSearch(){
+		getEmpresas()
 	}
 	render() {	
 		return (
@@ -49,7 +52,7 @@ class Empresas extends Component {
 						</section>
 						<ul className="form-cadastro__lista-botao">
 							<li><Button className="form-cadastro__botao" onClick={this.handleAdd}>Adicionar</Button></li>
-							<li><Button className="form-cadastro__botao">Pesquisar</Button></li>
+						<li><Button className="form-cadastro__botao" onClick={this.handleSearch}>Pesquisar</Button></li>
 							<li><Button className="form-cadastro__botao">Remover</Button></li>
 						</ul>
 					{/* </Form> */}
