@@ -3,19 +3,25 @@ export const LOGA_USUARIO = 'LOGA_USUARIO'
 export const DESLOGA_USUARIO = 'DESLOGA_USUARIO'
 
 
-export function logaUsuario() {
-    console.log("12345")
+export function logaUsuario(email, senha) {
+    console.log("ok: " + email)
     return dispatch => {
-        postLogin()
+        postLogin(email, senha)
             .then(response => dispatch({
-                type: LOGA_USUARIO,
-                token: response.data.token
+                type: LOGA_USUARIO
             }))
         .catch(error => {
             console.log('Ocorreu um erro', error)
         })
     }
 }
+
+// export function logaUsuario(email, senha) {
+//     console.log("ok: " + email)
+//     return {
+//         type: LOGA_USUARIO
+//     }
+// }
 
 export function deslogaUsuario() {
     return {
