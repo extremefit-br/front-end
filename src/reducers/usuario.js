@@ -7,7 +7,7 @@ import {
 export function usuario(estadoAtual = false, action) {
     switch (action.type) {
         case LOGA_USUARIO:
-            return true
+            return (true, action.key)
         case DESLOGA_USUARIO:
             return false
         default:

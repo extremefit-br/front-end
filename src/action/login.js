@@ -8,20 +8,14 @@ export function logaUsuario(email, senha) {
     return dispatch => {
         postLogin(email, senha)
             .then(response => dispatch({
-                type: LOGA_USUARIO
+                type: LOGA_USUARIO,
+                key: response.data.accessToken
             }))
-        .catch(error => {
-            console.log('Ocorreu um erro', error)
-        })
+            .catch(error => {
+                console.log('Ocorreu um erro', error)
+            })
     }
 }
-
-// export function logaUsuario(email, senha) {
-//     console.log("ok: " + email)
-//     return {
-//         type: LOGA_USUARIO
-//     }
-// }
 
 export function deslogaUsuario() {
     return {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDica } from '../../../api/dicas.js'
+import { getDicas } from '../../../api/dicas.js'
 
 
 const Pesquisa = props => {
@@ -12,7 +12,7 @@ const Pesquisa = props => {
     // }
 
     const renderRows = () => {
-        const list = [getDica()]
+        const list = [getDicas()]
 
         return (
             console.log('teste'+list)

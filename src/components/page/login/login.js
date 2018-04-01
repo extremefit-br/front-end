@@ -13,18 +13,7 @@ import { logaUsuario } from '../../../action/login.js'
 
 
 class Login extends Component {
-	// constructor(props) {
-	// 	super(props)
-	// 	this.state = { email: "admin", senha:"admin@extremefit"}
-	// 	this.handleAdd = this.handleAdd.bind(this)
-	// }
-	// handleAdd(){
-	// 	console.log("teste123")
-	// 	const email = this.props.email
-	// 	const senha = this.props.senha
-	// 	console.log(this.props.email + this.props.senha)
-	// 	postLogin(email, senha)
-	// }
+
 	constructor(props) {
 		super(props);
 		this.state = { isInvalid: false }
@@ -37,16 +26,12 @@ class Login extends Component {
 			email: this.email,
 			senha: this.senha
 		})
-		console.log("email: " + this.email)
-		console.log("senha: " + this.senha)
 		this.props.logaUsuario(event, this.email, this.senha)
 	}
 
 	handleChange(name, value, isInvalid) {
 		this[name] = value
 		this.setState({ isInvalid })
-		
-		// console.log('alt: ' + this[name])
 	}
 
 	render() {
@@ -54,7 +39,7 @@ class Login extends Component {
 
 		return (
 			usuario ? (
-				<Redirect to="/especialista" />
+				<Redirect to="/" />
 			) : (
 				<Container className="login">
 					<div>
@@ -84,8 +69,6 @@ class Login extends Component {
 								onChange={this.handleChange}/>
 						</div>
 						<a className="link-esqueci-senha align-center">Esqueci minha senha</a>
-					{/* <Button className="login-botao align-center" onClick={this.handleAdd}>Login</Button> */}
-						{/* <Button className="login-botao align-center" onClick={this.props.logaUsuario}>Login</Button> */}
 						<Button className="login-botao align-center">Login</Button>
 					</Form> 
 				</Container>
