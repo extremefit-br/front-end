@@ -3,9 +3,9 @@ export const ADD_EMPRESA = 'ADD_EMPRESA'
 export const GET_EMPRESA = 'GET_EMPRESA'
 export const DELETE_EMPRESA = 'DELETE_EMPRESA'
 
-export function addEmpresa() {
+export function addEmpresa(empresa) {
     return dispatch => {
-        postEmpresas()
+        postEmpresas(empresa)
             .then(response => dispatch({
                 type: ADD_EMPRESA
             }))

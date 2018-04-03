@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { postEmpresas, getEmpresas } from '../../../api/empresa.js'
+import { addEmpresa, getEmpresa } from '../../../action/empresa'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
 import Form from '../../form/form.js'
@@ -23,10 +23,20 @@ class Empresas extends Component {
 
 	handleSearch(event){
 		console.log("teste evento pesquisa")
-		this.props.getEmpresas(event)
+		this.props.buscaEmpresas(event)
 	}
 
-	handleAdd(){
+	handleAdd(event){
+		event.preventDefault()
+
+		const empresa = {
+			nomeFantasia: this.nomeFantasia,
+			razaoSocial: this.razaoSocial,
+			cnae: this.cnae,
+			cnpj: this.cnpj
+		}
+
+		this.props.adicionaEmpresa(empresa)
 
 	}
 
@@ -37,6 +47,8 @@ class Empresas extends Component {
 	
 	render() {	
 		const { usuario } = this.props
+
+		console.log(this.props.empresas)
 		return usuario ? (
 			<Fragment>
 				<Menu />
@@ -82,11 +94,26 @@ class Empresas extends Component {
 							</div>
 						</section>
 						<ul className="form-cadastro__lista-botao">
-							<li><Button className="form-cadastro__botao" onSubmit={this.handleAdd}>Adicionar</Button></li>
-							<li><Button className="form-cadastro__botao" onSubmit={this.handleSearch}>Pesquisar</Button></li>
+							<li><Button className="form-cadastro__botao" type="button" onClick={this.handleAdd}>Adicionar</Button></li>
+							<li><Button className="form-cadastro__botao" type="button" onClick={this.handleSearch}>Pesquisar</Button></li>
 							<li><Button className="form-cadastro__botao">Remover</Button></li>
 						</ul>
 					</Form>
+
+					<ul>
+
+					{
+						this.props.empresas && this.props.empresas.map(empresa => (
+								<li>
+									{empresa.nomeFantasia}<br />
+									{empresa.razaoSocial}<br />
+									{empresa.cnae}<br />
+									{empresa.cnpj}<br />
+								</li>
+						))
+					}
+
+					</ul>
 				</Container>
 			</Fragment>
 		) : (
@@ -97,14 +124,18 @@ class Empresas extends Component {
 
 
 const mapStateToProps = state => ({
-	usuario: state.usuario
+	usuario: state.usuario,
+	empresas: state.empresa
 })
 
 const mapDispatchToProps = dispatch => ({
 	buscaEmpresas: (event) => {
 		event.preventDefault()
-		dispatch(getEmpresas())
-	} 
+		dispatch(getEmpresa())
+	},
+	adicionaEmpresa: (empresa) => {
+		dispatch(addEmpresa(empresa))
+	}
 })
 
 

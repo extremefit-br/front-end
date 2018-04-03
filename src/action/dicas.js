@@ -3,9 +3,9 @@ export const ADD_DICA = 'ADD_DICA'
 export const GET_DICA = 'GET_DICA'
 export const DELETE_DICA = 'DELETE_DICA'
 
-export function addDica() {
+export function addDica(dicas) {
     return dispatch => {
-        postDicas()
+        postDicas(dicas)
             .then(response => dispatch({
                 type: ADD_DICA
             }))
@@ -19,7 +19,8 @@ export function getDica() {
     return dispatch => {
         getDicas()
             .then(response => dispatch({
-                type: GET_DICA
+                type: GET_DICA,
+                info: response.data
             }))
             .catch(error => {
                 console.log('Ocorreu um erro', error)
