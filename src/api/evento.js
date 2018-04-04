@@ -10,5 +10,6 @@ export function getEventos() {
 }
 
 export function deleteEventos(id) {
+    console.log('cheguei no api de delete: ' + id)
     return instance.delete('/Eventos', { id })
 }

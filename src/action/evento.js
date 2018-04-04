@@ -28,9 +28,9 @@ export function getEvento() {
     }
 }
 
-export function deleteEvento() {
+export function deleteEvento(id) {
     return dispatch => {
-        deleteEventos()
+        deleteEventos(id)
             .then(response => dispatch({
                 type: DELETE_EVENTO
             }))

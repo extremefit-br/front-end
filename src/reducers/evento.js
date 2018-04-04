@@ -13,7 +13,7 @@ export function evento(estadoAtual = [], action) {
                 ...action.info
             ]
         case DELETE_EVENTO:
-            return false
+            return []
         default:
             return estadoAtual
     }

@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { addEvento, getEvento } from '../../../action/evento'
+import { addEvento, getEvento, deleteEvento } from '../../../action/evento'
 import { getUnidade } from '../../../action/unidade'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
@@ -9,6 +9,7 @@ import Form from '../../form/form.js'
 import FormLabel from '../../form/formLabel/formLabel.js'
 import Input from '../../form/formInput/formInput.js'
 import Button from '../../form/formButton/formButton.js'
+import FaRemove from 'react-icons/lib/ti/delete'
 import './eventos.css'
 import decode from 'jwt-decode';
 import Select from 'react-select';
@@ -57,6 +58,12 @@ class Eventos extends Component {
 	handleChange(name, value, isInvalid) {
 		this[name] = value
 		this.setState({ isInvalid })
+	}
+
+	handleDelete(id){
+		// event.preventDefault()
+		console.log("ID: "+id)
+		this.props.deletaEvento(id)
 	}
 
 	render() {
@@ -118,7 +125,7 @@ class Eventos extends Component {
 						}
 
 					</ul>*/}
-					
+
 					<table className='table-pesquisa' cellspacing='0'>
 						<h1 className="form-cadastro__titulo">Pesquisa</h1>
 						<thead>
@@ -132,12 +139,14 @@ class Eventos extends Component {
 						<tbody>
 							{
 								this.props.eventos && this.props.eventos.map(evento => (
+									
 									<tr>
-										<td className='linha'>{evento.unidadeFavoritaId}</td>
+										<td className='linha'>{evento.id}</td>
 										<td className='linha'>{evento.descricao}</td>
-										{/*<td>{evento.usuarioId}</td>*/}
 										<td className='linha'>{evento.unidade.nomeUnidade}</td>
-										<td className='linha'>X</td>
+										<td className='linha'><Button className="btn-remover" type="button" 
+											onClick={() => this.handleDelete(evento.id)}
+										><FaRemove /></Button></td>
 									</tr>
 								))
 							}
@@ -183,7 +192,9 @@ const mapDispatchToProps = dispatch => ({
 	},
 	buscaUnidades: () => {
 		dispatch(getUnidade())
-	},
+	}, deletaEvento: (id) => {
+		dispatch(deleteEvento(id))
+	}
 
 })
 

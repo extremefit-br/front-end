@@ -66,3 +66,14 @@ thead .linha{
 tbody .linha{
     color: #e94e1b;
 }
+.btn-remover{
+    background: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+.btn-remover svg{
+    height: 60%;
+    width: 60%;
+    color: #b80505;
+}
