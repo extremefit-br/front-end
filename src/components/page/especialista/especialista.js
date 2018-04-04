@@ -1,24 +1,54 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { addEspecialista } from '../../../action/especialista'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
 import Form from '../../form/form.js'
 import FormLabel from '../../form/formLabel/formLabel.js'
-import FormInput from '../../form/formInput/formInput.js'
+import Input from '../../form/formInput/formInput.js'
 import Button from '../../form/formButton/formButton.js'
 import './especialista.css'
 
-class Especialista extends Component {
+class Empresas extends Component {
 	
 	constructor(props) {
 		super(props);
 		this.state = { isInvalid: false }
+		// this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSearch = this.handleSearch.bind(this)
+		this.handleAdd = this.handleAdd.bind(this)
 	}
 
+	handleSearch(event){
+		console.log("teste evento pesquisa")
+		this.props.buscaEmpresas(event)
+	}
+
+	handleAdd(event){
+		event.preventDefault()
+
+		const especialista = {
+			nome: this.nome,
+			especialidade: this.especialidade,
+			email: this.email,
+			senha: this.senha
+
+		}
+
+		this.props.adicionaEspecialista(especialista)
+
+	}
+
+	handleChange(name, value, isInvalid) {
+		this[name] = value
+		this.setState({ isInvalid })
+	}
+	
 	render() {	
 		const { usuario } = this.props
-		console.log("var: " + usuario)
+
 		return usuario ? (
 			<Fragment>
 				<Menu />
@@ -27,55 +57,68 @@ class Especialista extends Component {
 						<h1 className="form-cadastro__titulo">Especialista</h1>
 						<section className="secao-campos">
 							<div className="secao-campos__metade">
-								<FormLabel 
-								className="form-cadastro__label form-cadastro__label--lineblock" 
-								for="nome">Nome</FormLabel>
-								<FormInput 
-								className="form-cadastro__campo form-cadastro__campo--input" 
-								id="nome"/>
-								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" 
-								for="especialidade">Especialidade</FormLabel>
-								<FormInput className="form-cadastro__campo form-cadastro__campo--input" 
-								id="especialidade"/>
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="nome">Nome</FormLabel>
+								<Input 
+									className="form-cadastro__campo form-cadastro__campo--input" 
+									type="text"
+									name="nome"
+									placeholder="Nome"
+									aria-label="nome"
+									onChange={this.handleChange} />
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="especialiadade">Especialidade</FormLabel>
+								<Input 
+									className="form-cadastro__campo form-cadastro__campo--input" 
+									type="text"
+									name="especialidade"
+									placeholder="Especialidade"
+									aria-label="especialidade"
+									onChange={this.handleChange} />
 							</div>
 							<div className="secao-campos__metade">
-								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" 
-								for="dicaTip">E-mail</FormLabel>
-								<FormInput className="form-cadastro__campo form-cadastro__campo--input" 
-								id="email" type="email" autoComplete="email" aria-label="email"  />
-								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" 
-								for="nome">Senha</FormLabel>
-								<FormInput className="form-cadastro__campo form-cadastro__campo--input" 
-								type="password" id="senha" autoComplete="current-password" 
-								aria-label="senha"/>
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="email">Email</FormLabel>
+								<Input 
+									className="form-cadastro__campo form-cadastro__campo--input" 
+									type="text"
+									name="email"
+									placeholder="E-mail"
+									aria-label="email"
+									onChange={this.handleChange} />
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="senha">Senha</FormLabel>
+								<Input 
+									className="form-cadastro__campo form-cadastro__campo--input" 
+									type="text"
+									name="senha"
+									placeholder="Senha"
+									aria-label="senha"
+									onChange={this.handleChange} />
 							</div>
 						</section>
 						<ul className="form-cadastro__lista-botao">
-							<li><Button className="form-cadastro__botao">Adicionar</Button></li>
-							<li><Button className="form-cadastro__botao">Pesquisar</Button></li>
+							<li><Button className="form-cadastro__botao" type="button" onClick={this.handleAdd}>Adicionar</Button></li>
+							{/* <li><Button className="form-cadastro__botao" type="button" onClick={this.handleSearch}>Pesquisar</Button></li> */}
 							<li><Button className="form-cadastro__botao">Remover</Button></li>
 						</ul>
 					</Form>
+
+				
 				</Container>
 			</Fragment>
 		) : (
-				<Redirect to="/login" />
-			) 
+			<Redirect to="/login" />
+		) 
 	}
 }
 
-// export default Especialista
 
 const mapStateToProps = state => ({
 	usuario: state.usuario
 })
 
 const mapDispatchToProps = dispatch => ({
-	logaUsuario: (event, email, senha) => {
-		event.preventDefault()
-		// dispatch(logaUsuario(email, senha))
+	adicionaEspecialista: (especialista) => {
+		dispatch(addEspecialista(especialista))
 	}
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Especialista)
+export default connect(mapStateToProps, mapDispatchToProps)(Empresas)

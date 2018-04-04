@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDicas } from '../../../api/dicas.js'
+import { getDicas } from '../../../api/dica.js'
 
 
 const Pesquisa = props => {

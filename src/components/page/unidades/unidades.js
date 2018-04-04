@@ -1,22 +1,24 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { addDica, getDica } from '../../../action/dica'
+import { addUnidade, getUnidade } from '../../../action/unidade'
 import Menu from '../../menu/menu.js'
 import Container from '../../container/container.js'
 import Form from '../../form/form.js'
 import FormLabel from '../../form/formLabel/formLabel.js'
 import Input from '../../form/formInput/formInput.js'
 import Button from '../../form/formButton/formButton.js'
-import './dicas.css'
+import './unidades.css'
 import decode from 'jwt-decode';
+import Select from 'react-select';
 
-class Dicas extends Component {
+class Unidades extends Component {
 
 	constructor(props) {
 		super(props);
+		
 		this.state = { isInvalid: false }
-		// this.handleSubmit = this.handleSubmit.bind(this)
+
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
 		this.handleAdd = this.handleAdd.bind(this)
@@ -24,24 +26,18 @@ class Dicas extends Component {
 
 	handleSearch(event) {
 		console.log("teste evento pesquisa")
-
-		let usuarioId = decode(localStorage.getItem('usuario'))
-
-		console.log(usuarioId.Nome)
-		this.props.buscaDicas(event)
+		this.props.buscaUnidades(event)
 	}
 
 	handleAdd(event) {
 		event.preventDefault()
 
-		let usuarioId = decode(localStorage.getItem('usuario'))
-
-		const dica = {
-			descricao: this.descricao,
-			usuarioId: usuarioId.Nome
+		const unidade = {
+			nomeUnidade: this.nomeUnidade,
+			cidade: this.cidade,
 		}
 
-		this.props.adicionaDica(dica)
+		this.props.adicionaUnidade(unidade)
 
 	}
 
@@ -52,24 +48,38 @@ class Dicas extends Component {
 
 	render() {
 		const { usuario } = this.props
+		
+		let usuarioId = decode(localStorage.getItem('usuario'))
 
-		console.log(this.props.dicas)
+		// return usuario && (usuarioId.role == "Especialista" || usuarioId.role == "Admin" || usuarioId.role == "Sesi") ? (
 		return usuario ? (
 			<Fragment>
 				<Menu />
 				<Container className="main">
 					<Form className="form-cadastro">
-						<h1 className="form-cadastro__titulo">Dicas</h1>
+						<h1 className="form-cadastro__titulo">Eventos</h1>
 						<section className="secao-campos">
 							<div className="secao-campos__metade">
-								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="descricao">Descrição</FormLabel>
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="descricao">Nome Unidade</FormLabel>
 								<Input
 									className="form-cadastro__campo form-cadastro__campo--input"
 									type="text"
-									name="descricao"
-									placeholder="Descrição"
-									aria-label="descricao"
-									onChange={this.handleChange} />
+									name="nomeUnidade"
+									placeholder="Nome da Unidade"
+									aria-label="nomeUnidade"
+									onChange={this.handleChange}
+								/>
+
+								<FormLabel className="form-cadastro__label form-cadastro__label--lineblock" for="descricao">Cidade</FormLabel>
+								<Input
+									className="form-cadastro__campo form-cadastro__campo--input"
+									type="text"
+									name="cidade"
+									placeholder="Cidade"
+									aria-label="cidade"
+									onChange={this.handleChange}
+								/>
+
 							</div>
 						</section>
 						<ul className="form-cadastro__lista-botao">
@@ -82,15 +92,16 @@ class Dicas extends Component {
 					<ul>
 
 						{
-							this.props.dicas && this.props.dicas.map(dica => (
+							this.props.unidades && this.props.unidades.map(unidade => (
 								<li>
-									{dica.descricao}<br />
-									{dica.usuarioId}<br />
+									{unidade.nomeUnidade}<br />
+									{unidade.cidade}<br />
 								</li>
 							))
 						}
 
 					</ul>
+
 				</Container>
 			</Fragment>
 		) : (
@@ -102,18 +113,19 @@ class Dicas extends Component {
 
 const mapStateToProps = state => ({
 	usuario: state.usuario,
-	dicas: state.dica
+	unidades: state.unidade
 })
 
 const mapDispatchToProps = dispatch => ({
-	buscaDicas: (event) => {
+	buscaUnidades: (event) => {
 		event.preventDefault()
-		dispatch(getDica())
+		dispatch(getUnidade())
 	},
-	adicionaDica: (dica) => {
-		dispatch(addDica(dica))
+	adicionaUnidade: (unidade) => {
+		dispatch(addUnidade(unidade))
 	}
+
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dicas)
+export default connect(mapStateToProps, mapDispatchToProps)(Unidades)

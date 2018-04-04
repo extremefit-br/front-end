@@ -1,11 +1,9 @@
-import { postDicas, getDicas, deleteDicas } from "../api/dicas.js"
+import { postEspecialistas } from "../api/especialista.js"
 export const ADD_ESPECIALISTA = 'ADD_ESPECIALISTA'
-export const GET_ESPECIALISTA = 'GET_ESPECIALISTA'
-export const DELETE_ESPECIALISTA = 'DELETE_ESPECIALISTA'
 
-export function addDica() {
+export function addEspecialista(especialista) {
     return dispatch => {
-        postDicas()
+        postEspecialistas(especialista)
             .then(response => dispatch({
                 type: ADD_ESPECIALISTA
             }))
@@ -13,28 +11,4 @@ export function addDica() {
                 console.log('Ocorreu um erro', error)
             })
     }
-}
-
-export function getDica() {
-    return dispatch => {
-        getDicas()
-            .then(response => dispatch({
-                type: GET_ESPECIALISTA
-            }))
-            .catch(error => {
-                console.log('Ocorreu um erro', error)
-            })
-    }
-}
-
-export function deleteDica() {
-    return dispatch => {
-        deleteDicas()
-            .then(response => dispatch({
-                type: DELETE_ESPECIALISTA
-            }))
-            .catch(error => {
-                console.log('Ocorreu um erro', error)
-            })
-    }
-}
+} 

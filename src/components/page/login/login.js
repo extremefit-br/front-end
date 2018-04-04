@@ -10,6 +10,7 @@ import LogoVidaSaudavel from './logo_vida_saudavel.png'
 import './login.css'
 import { connect } from 'react-redux'
 import { logaUsuario } from '../../../action/login.js'
+import decode from 'jwt-decode'
 
 
 class Login extends Component {
